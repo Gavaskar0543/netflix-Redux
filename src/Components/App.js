@@ -14,8 +14,8 @@ function App() {
 
   <div className='container'>
     <div>
-      {data.map(movie => 
-        <MovieCard movies={movie} />
+      {data.map((movie,index) => 
+        <MovieCard movies={movie} key={`${index}`}/>
       )}
       </div>
 
