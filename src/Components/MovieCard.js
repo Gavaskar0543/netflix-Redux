@@ -1,7 +1,20 @@
+import React from 'react';
+import { addFavMovies ,removeFavMovies} from "../action";
+class MovieCard extends React.Component {
 
-const MovieCard = ({movies}) => {
-   
-return(
+ handleClick =() =>{
+ const {movies} = this.props;
+ this.props.dispatch(addFavMovies(movies));
+ console.log(this.props);
+}
+handleunFavClick =() =>{
+  const {movies} = this.props;
+  this.props.dispatch(removeFavMovies(movies));
+ }
+   render(){
+    const {movies} = this.props;
+    const {isFavMovie} = this.props;
+   return(
     <>
     <div className="d-flex mb-5">
       <div id="left">
@@ -12,11 +25,16 @@ return(
         <p>{movies.year}</p>
         <p>{movies.Director}</p>
         <p>{movies.Actors}</p>
-        <button className="btn btn-outline-warning">Add Favourite</button>
+        {
+          isFavMovie ? ( <button className="btn btn-danger" onClick={this.handleunFavClick}>Remove Favourite</button>)
+          :( <button className="btn btn-outline-warning" onClick={this.handleClick}>AddFavourite</button>)
+        }
+       
       </div>
 
     </div>
     </>
 )
+}
 }
 export default MovieCard;
