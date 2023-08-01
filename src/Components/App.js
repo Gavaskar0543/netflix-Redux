@@ -17,9 +17,10 @@ class App extends React.Component {
    
     console.log(store)
   }
-  handleFavMovie(movie){
-    const {favmovies} = this.props.store.getState();
-    let index = favmovies.indexOf(movie);
+  handleFavMovie(movies){
+    const {movie} = this.props.store.getState();
+    
+    let index = movie.favmovies.indexOf(movies);
     if(index !== -1){
       return true;
     }
@@ -30,8 +31,8 @@ class App extends React.Component {
    this.props.store.dispatch(setshows(val));
   }
   render(){
-   
-  const {list,favmovies,showSelected} = this.props.store.getState();
+   const {movie} = this.props.store.getState();
+  const {list,favmovies,showSelected} = movie;
   const displayMovies = showSelected ? favmovies : list;
   
   return (
