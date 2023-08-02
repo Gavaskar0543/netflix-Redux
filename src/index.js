@@ -3,6 +3,7 @@ import {createStore , applyMiddleware} from 'redux';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './Components/App';
+import thunk from 'redux-thunk';
 import combineReducers from './reducer';
 // const logger = function({dispatch,getState}){
 //   return function(next){
@@ -16,7 +17,7 @@ const logger = ({dispatch,getState}) => (next) => (action) =>{
   console.log('Action_TYPE =', action.type);
   next(action);
 }
-const store = createStore(combineReducers , applyMiddleware(logger));
+const store = createStore(combineReducers  , applyMiddleware(logger,thunk));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
