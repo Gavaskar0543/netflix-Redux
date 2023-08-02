@@ -14,7 +14,8 @@ import combineReducers from './reducer';
 //   }
 // }
 const logger = ({dispatch,getState}) => (next) => (action) =>{
-  console.log('Action_TYPE =', action.type);
+  if(typeof action !== 'function'){
+  console.log('Action_TYPE =', action.type);}
   next(action);
 }
 const store = createStore(combineReducers  , applyMiddleware(logger,thunk));
