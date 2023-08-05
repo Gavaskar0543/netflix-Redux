@@ -20,7 +20,7 @@ const logger = ({dispatch,getState}) => (next) => (action) =>{
   next(action);
 }
 const store = createStore(combineReducers  , applyMiddleware(logger,thunk));
-const StoreContext = createContext();
+export const StoreContext = createContext();
 class Provider extends React.Component{
   render(){
     const {store} = this.props;

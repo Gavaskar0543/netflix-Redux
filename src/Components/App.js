@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import {data} from '../data'
 import MovieCard from './MovieCard'
 import { addMovies,setshows} from '../action';
+import {StoreContext} from '../index'
 
 class App extends React.Component {
   componentDidMount(){
@@ -35,27 +36,39 @@ class App extends React.Component {
   const {list,favmovies,showSelected} = movie;
   const displayMovies = showSelected ? favmovies : list;
   
-  return (
- <>
-<Navbar/>
-<div className='container mt-5 d-flex-column justify-content-center align-item-center '>
-  <div style={{cursor:'pointer'}} className=' w-25 d-flex align-item-cennter justify-content-between '>
-   <div className='mb-5 w-auto '> <h5 onClick={() => this.onchangeTab(false)}>Movies</h5></div>
-   <div  className=' mb-5 w-auto'> <h5  onClick={() => this.onchangeTab(true)}>Favourite Movie</h5></div>
-  </div>
+  return(
+    <StoreContext.Consumer>
+      {
+        (() => {
 
-  <div className='container'>
-    <div>
-      {displayMovies.map((movie,index) => 
-        <MovieCard movies={movie} key={`${index}`}  dispatch={this.props.store.dispatch} isFavMovie={this.handleFavMovie(movie)}/>
-      )}
-      </div>
+          return (
+            <>
+           <Navbar/>
+           <div className='container mt-5 d-flex-column justify-content-center align-item-center '>
+             <div style={{cursor:'pointer'}} className=' w-25 d-flex align-item-cennter justify-content-between '>
+              <div className='mb-5 w-auto '> <h5 onClick={() => this.onchangeTab(false)}>Movies</h5></div>
+              <div  className=' mb-5 w-auto'> <h5  onClick={() => this.onchangeTab(true)}>Favourite Movie</h5></div>
+             </div>
+           
+             <div className='container'>
+               <div>
+                 {displayMovies.map((movie,index) => 
+                   <MovieCard movies={movie} key={`${index}`}  dispatch={this.props.store.dispatch} isFavMovie={this.handleFavMovie(movie)}/>
+                 )}
+                 </div>
+           
+             </div>
+           
+           </div>
+            </>
+             );
 
-  </div>
+        })
+      }
+    </StoreContext.Consumer>
+  )
 
-</div>
- </>
-  );
+ 
 }
 }
 export default App;
