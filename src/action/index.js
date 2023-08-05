@@ -37,11 +37,8 @@ export function setshows(val) {
 }
 
 export async function handleMovieSearch(movie) {
-   const url = `http://www.omdbapi.com/?apikey=bb3de621&t=${encodeURIComponent(movie)}`;
+   const url = `http://www.omdbapi.com/?apikey=bb3de621&t=${movie}`;
 
-   const response = await fetch(url);
-   if (!response.ok) {
-      throw new Error('Network response was not ok');
-   }
-   return await response.json();
+   await fetch(url)
+          .then(response => console.log(response.json()))
    }

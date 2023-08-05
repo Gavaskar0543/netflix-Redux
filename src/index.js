@@ -1,5 +1,6 @@
 import React from 'react';
 import {createStore , applyMiddleware} from 'redux';
+import { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './Components/App';
@@ -19,11 +20,23 @@ const logger = ({dispatch,getState}) => (next) => (action) =>{
   next(action);
 }
 const store = createStore(combineReducers  , applyMiddleware(logger,thunk));
-
+const StoreContext = createContext();
+class Provider extends React.Component{
+  render(){
+    const {store} = this.props;
+    return(
+      <StoreContext value={store}>
+        {this.props.childern}
+      </StoreContext>
+    )
+  }
+}
+console.log(StoreContext);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+    <Provider store={store}>
     <App store={store} />
-  </React.StrictMode>
+    </Provider>
+  
 );
 
