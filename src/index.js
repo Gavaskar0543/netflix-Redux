@@ -20,23 +20,12 @@ const logger = ({dispatch,getState}) => (next) => (action) =>{
   next(action);
 }
 const store = createStore(combineReducers  , applyMiddleware(logger,thunk));
-export const StoreContext = createContext();
-class Provider extends React.Component{
-  render(){
-    const {store} = this.props;
-    return(
-      <StoreContext value={store}>
-        {this.props.childern}
-      </StoreContext>
-    )
-  }
-}
-console.log(StoreContext);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Provider store={store}>
+   
     <App store={store} />
-    </Provider>
+   
   
 );
 
