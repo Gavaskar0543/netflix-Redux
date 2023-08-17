@@ -31,18 +31,15 @@ class App extends React.Component {
     this.props.store.dispatch(setshows(val));
   }
   render() {
-    const { movie } = this.props.store.getState();
+    console.log(this.props.store.getState());
+    const { movie,search } = this.props.store.getState();
     const { list, favmovies, showSelected } = movie;
     const displayMovies = showSelected ? favmovies : list;
 
     return (
 
-      
 
-
-       
-          
-           <><Navbar /><div className='container mt-5 d-flex-column justify-content-center align-item-center '>
+           <><Navbar search={search} /><div className='container mt-5 d-flex-column justify-content-center align-item-center '>
         <div style={{ cursor: 'pointer' }} className=' w-25 d-flex align-item-cennter justify-content-between '>
           <div className='mb-5 w-auto '> <h5 onClick={() => this.onchangeTab(false)}>Movies</h5></div>
           <div className=' mb-5 w-auto'> <h5 onClick={() => this.onchangeTab(true)}>Favourite Movie</h5></div>

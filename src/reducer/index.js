@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { MoviesAdd,FavMovie,RemoveFav,setShowSelected } from "../action";
+import { MoviesAdd,FavMovie,RemoveFav,setShowSelected,ADD_SEARCH_RESULT } from "../action";
 
 const initialMovieState = {
     list :[],
@@ -50,7 +50,15 @@ const initialSearchState={
 }
 //search state
 export function search(state = initialSearchState,action){
-  return state;
+    switch(action.type){
+    case ADD_SEARCH_RESULT:
+        return{
+            ...state,
+           result:action.movie
+        }
+    default:
+        return state
+    }
 }
 // //rootreducer initialstate
 // const instialRootState={

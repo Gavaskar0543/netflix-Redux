@@ -20,6 +20,7 @@ import { handleMovieSearch } from '../action';
     }
 
     render(){
+        const {result} = this.props.search;
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-dark">
